@@ -103,7 +103,6 @@ public class SongDao implements Dao<Song> {
             stmt.setString(4, params[4]);
             stmt.setString(5, params[0]); // Id is at the start
             result = stmt.executeUpdate() > 0;
-
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

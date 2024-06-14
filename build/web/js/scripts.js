@@ -26,7 +26,7 @@ function onMusicChanged(evt) {
     },
     onError: function (e) {
       alert(e);
-    },
+    }
   });
 
   getAudio();
