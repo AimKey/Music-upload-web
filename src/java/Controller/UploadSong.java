@@ -33,6 +33,7 @@ public class UploadSong extends HttpServlet {
         
         // User upload song should be like this: something.mp3
         // The final path should be like this: (...\WebMusicPlayer\build\web\songs\something\something.mp3)
+        // The final path should be like this: (...\WebMusicPlayer\build\web\songs\something\something.jpeg)
         String fullPath = path + "\\songs" + "\\" + fileNameWithoutExtension;
         String songPath = fullPath + "\\" + fileName;
         String imagePath = fullPath +  "\\" + fileNameWithoutExtension + ".jpeg";

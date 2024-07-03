@@ -32,14 +32,16 @@ public class SongDao implements Dao<Song> {
         }
         return Optional.ofNullable(s);
     }
-
+    
+    // Get ALL
+    
     @Override
     public ArrayList<Song> getAll() {
         ArrayList<Song> songs = new ArrayList<>();
         try (Connection con = db.getConnection()) {
             ResultSet rs;
             try (Statement stmt = con.createStatement()) {
-                rs = stmt.executeQuery("SELECT * FROM Song ");
+                rs = stmt.executeQuery("SELECT * FROM Song");
                 while (rs.next()) {
                     Song s = new Song(rs.getInt("id"),rs.getString("title"), rs.getString("artists"),
                             rs.getString("album"), rs.getInt("duration"),
@@ -60,6 +62,7 @@ public class SongDao implements Dao<Song> {
         try (Connection con = db.getConnection()) {
             ResultSet rs;
             try (PreparedStatement stmt = con.prepareStatement(
+                    // Insert artsit
                     "INSERT INTO Song (title, artists, album, duration, songFolder) "
                     + "OUTPUT inserted.title "
                     + "VALUES (?,?,?,?,?) ")) {
@@ -110,7 +113,7 @@ public class SongDao implements Dao<Song> {
     }
 
     @Override
-    public boolean delete(Song t) {
+    public boolean delete(long id) {
         boolean result = false;
         try (Connection con = db.getConnection()) {
             ResultSet rs;
@@ -119,7 +122,7 @@ public class SongDao implements Dao<Song> {
                     + "OUTPUT deleted.id "
                     + "WHERE id = ? "
             )) {
-                stmt.setInt(1, t.getId());
+                stmt.setLong(1, id);
                 rs = stmt.executeQuery();
                 while (rs.next()) {
                     result = rs.getRow() >= 0; // If > 0 mean there is an id
@@ -131,5 +134,7 @@ public class SongDao implements Dao<Song> {
         }
         return result;
     }
+    
+    
 
 }

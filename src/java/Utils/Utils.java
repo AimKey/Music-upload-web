@@ -66,7 +66,10 @@ public class Utils {
             } else {
                 destPath = "";
             }
-
+            
+            // MP3 read data, luu data
+            // Server 
+            
             // Create and return Song object
             return new Song(title, artist, album, duration, destPath);
         } catch (IOException | CannotReadException | InvalidAudioFrameException | ReadOnlyFileException | KeyNotFoundException | TagException e) {

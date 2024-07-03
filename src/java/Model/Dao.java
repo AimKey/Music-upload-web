@@ -15,5 +15,5 @@ public interface Dao<T> {
     // UPDATE
     boolean update(T t, String[] params);
     // DELETE
-    boolean delete(T t);
+    boolean delete(long id);    
 }

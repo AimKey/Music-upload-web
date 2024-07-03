@@ -4,14 +4,21 @@
         <servlet-name>UploadSong</servlet-name>
         <servlet-class>Controller.UploadSong</servlet-class>
         <multipart-config>
-            <file-size-threshold>52428800</file-size-threshold> <!-- 50 MB -->
-            <max-file-size>52428800</max-file-size> <!-- 50 MB -->
-            <max-request-size>104857600</max-request-size> <!-- 100 MB -->
+            <file-size-threshold>52428800</file-size-threshold>
+            <!-- 50 MB -->
+            <max-file-size>52428800</max-file-size>
+            <!-- 50 MB -->
+            <max-request-size>104857600</max-request-size>
+            <!-- 100 MB -->
         </multipart-config>
     </servlet>
     <servlet>
         <servlet-name>GetSong</servlet-name>
         <servlet-class>Controller.GetSong</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSong</servlet-name>
+        <servlet-class>Controller.DeleteSong</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UploadSong</servlet-name>
@@ -21,5 +28,9 @@
         <servlet-name>GetSong</servlet-name>
         <url-pattern>/getsong</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>DeleteSong</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
 </web-app>

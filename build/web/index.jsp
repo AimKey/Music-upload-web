@@ -22,6 +22,7 @@
     <body>
 
         <%
+            // Just put it in the servlet handler
             session.setAttribute("contextPath", request.getContextPath());
         %>
         <div class="container-fluid justify-content-center text-center">
@@ -70,6 +71,7 @@
             <div class="row mb-5">
                 <h3>Upload music file to database here</h3>
                 <%
+                    // Can be easily replaced with jtsl
                     String msg = (String) request.getAttribute("status");
                     if (msg != null) {
                         out.println("<h3>" + msg + "</h3>");
@@ -82,15 +84,19 @@
                     <button class="btn btn-primary" type="submit">Send to server</button>
                 </form>
             </div>
+                
+                <div class="server-noti">
+                    <h3>Server delete notification here</h3>
+                    <h4></h4>
+                </div>
 
             <%
                 // This one is a little bit inefficient, because it has to make query whenever this page is loaded/refreshed
+                // It is recommended that we don't use java code in here at all. We should make use of the jtsl
                 ArrayList<Song> songs = new SongDao().getAll();
                 request.setAttribute("songs", songs);
             %>    
-
             <c:if test="${songs != null}">
-
                 <div class="row mb-5 gap-1 justify-content-center">
                     <c:forEach var="s" items="${songs}">
                         <div class="col-md-5 col-lg-3">
@@ -117,7 +123,7 @@
                                             <button class="btn btn-primary mb-1" onclick="playSong('${s.songFolder}${title}.mp3', this)">Play this song</button>
                                         </li>
                                         <li class="list-group-item">
-                                            <button class="btn btn-danger">Delete this song</button>
+                                            <button class="btn btn-danger" onclick="handleDeleteSong(${s.id})">Delete this song</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -129,10 +135,11 @@
 
             <%
                 // Retrieve the song metadata from the request scope
+                // Can be replaced with jtsl
                 Song s = (Song) request.getAttribute("song");
             %>
 
-            <c:if test="${song != null}" >
+            <c:if test="${song != null}" var="s">
                 <h2>Here is your song (This one is for song get from server):</h2>
                 <div class="song mb-5 row align-items-center justify-content-center gap-1">
 
